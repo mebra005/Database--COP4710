@@ -56,13 +56,12 @@ q6:= project authorFirst,authorLast (writtenMoreThanOne njoin author);
 
 
 %------------------------------------------------------------Question 7-----------------------------------------------------------------------------------------
+poor := project bookCode(select quality ='Poor' (copy));
+fair := project bookCode(select quality ='Fair' (copy));
+good := project bookCode(select quality ='Good' (copy));
+exellent := project bookCode(select quality ='Excellent' (copy));
 
-copyQualityBookCode := project bookCode, quality (copy);
-copyQulity := project quality(copy);
-%copydif := copyQualityBookCode intersection copyQulity;
-
-bookWithNotAllQuality :=  project bookCode ((project bookCode, quality (copy)) difference copyQualityBookCode);
-
+p7 := (poor intersect fair) intersect (good intersect exellent);
 
 
 
