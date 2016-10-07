@@ -42,10 +42,19 @@ WHERE	A.authornum = W.authornum AND B.bookcode = W.bookcode
 ORDER BY B.title, W.sequence;
 
 
-SELECT	price
+SELECT	COUNT(price)
 FROM 	copy AS C
-WHERE	price > 20 AND price < 25
-ORDER BY price;
+WHERE	price > 20 AND price < 25;
+
+
+SELECT	P.publishername, COUNT(*)
+FROM	book AS B, publisher AS P
+WHERE	B.publishercode = P.publishercode
+GROUP BY P.publishername
+HAVING	COUNT(*) > 2;
+			   
+
+
 
 
 
