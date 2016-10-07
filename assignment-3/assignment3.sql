@@ -1,10 +1,10 @@
 SELECT	title
-FROM	book
-WHERE	publishercode IN (SELECT	publishercode
-			  FROM		publisher
-			  WHERE		publishername = 'Penguin USA')
-			  ORDER BY title;
-			  
+FROM	book AS B
+WHERE	B.publishercode IN (SELECT	publishercode
+			   FROM		publisher
+			   WHERE	publishername = 'Penguin USA')
+			   ORDER BY	title;
+
 (SELECT	title
 FROM	book AS B
 WHERE	type ='PSY')
@@ -12,7 +12,8 @@ UNION
 (SELECT title
 FROM	book
 WHERE	publishercode='JP')
-ORDER BY title;
+ORDER BY title;	
+
 
 (SELECT	title
 FROM	book AS B
@@ -33,3 +34,23 @@ FROM	author AS A, book AS B, wrote AS W
 WHERE	A.authornum = W.authornum AND B.bookcode = W.bookcode
 	AND A.authorlast ='Steinbeck' AND A.authorfirst ='John'
 ORDER BY title;
+
+
+SELECT	title, publishercode, type, authorfirst, authorlast
+FROM	book AS B, author AS A, wrote as W
+WHERE	A.authornum = W.authornum AND B.bookcode = W.bookcode
+ORDER BY B.title, W.sequence;
+
+
+SELECT	price
+FROM 	copy AS C
+WHERE	price > 20 AND price < 25
+ORDER BY price;
+
+
+
+
+
+
+
+
