@@ -55,6 +55,37 @@ HAVING	COUNT(*) > 2;
 			   
 
 
+SELECT  B.title, A.authorfirst, A.authorlast
+FROM	author AS A, book AS B
+WHERE	(B.bookcode, A.authornum) IN (
+	SELECT	W.bookcode, W.authornum
+	FROM	wrote as W
+	WHERE	W.bookcode IN (
+		(SELECT bookcode 
+		FROM	wrote AS W) 
+		INTERSECT ALL
+		(SELECT	 C.bookcode
+		FROM	copy AS C, branch AS BR
+		WHERE	C.branchnum = BR.branchnum AND C.quality = 'Excellent' AND BR.branchname = 'Henry on the Hill')))
+		ORDER BY	title;
+
+
+
+SELECT bookcode 
+FROM	wrote AS W
+where W.bookcode in (
+SELECT	 C.bookcode
+FROM	copy AS C, branch AS BR
+WHERE	C.branchnum = BR.branchnum AND C.quality = 'Excellent' AND BR.branchname = 'Henry on the Hill');
+
+CREATE TABLE FictionCopies
+(bookcode	CHAR(4),
+ title		CHAR(40),
+ branchNum	DECIMAL(2,0),
+ copyNum	DECIMAL(2,0),
+ quality	CHAR(20),
+ price		DECIMAL(8,2))
+ ;
 
 
 
