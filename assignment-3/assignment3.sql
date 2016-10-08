@@ -94,5 +94,11 @@ WHERE		B.bookcode = C.bookcode AND B.type = 'FIC';
 
 
 
+SELECT	bookcode, title, 1.1 * price
+FROM	fictioncopies AS F
+WHERE	F.quality = 'Excellent'
+
+
+
 
 
