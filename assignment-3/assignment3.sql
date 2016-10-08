@@ -87,8 +87,10 @@ CREATE TABLE FictionCopies
  price		DECIMAL(8,2))
  ;
 
-
-
+INSERT INTO	fictioncopies (bookcode, title, branchnum, copynum, quality, price)
+SELECT		b.bookcode, title, branchnum, copynum, quality, price
+FROM		book AS B, copy AS C
+WHERE		B.bookcode = C.bookcode AND B.type = 'FIC';
 
 
 
